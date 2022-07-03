@@ -2,7 +2,8 @@ const express=require('express');
 const app=express();
 const bodyParser=require('body-parser');
 const client = require("@mailchimp/mailchimp_marketing");
-const port=process.env.PORT; //So as to run on heroku
+// const port=process.env.PORT; //So as to run on heroku
+const port=3000
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"))
 const list={
@@ -36,8 +37,9 @@ app.post("/",function(req,res)
         // const response = await client.lists.getAllLists();
 
         // const response = await client.lists.getList("e513c2e832");
+        var response;
         try{
-            const response = await client.lists.addListMember("e513c2e832", list);    
+            response = await client.lists.addListMember("e513c2e832", list);    
         }
         catch(e)
         {
